@@ -1,0 +1,107 @@
+/*!*************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[12].use[3]!./app/globals.css ***!
+  \*************************************************************************************************************************************************************************************************************************************************************/
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: #0b0f18;
+  color: #e8ecf4;
+  overflow: hidden;
+}
+
+/* ── menus ── */
+.menu-root {
+  height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(ellipse at 30% 20%, #1c2a4a 0%, #0b0f18 65%);
+}
+.menu-panel {
+  display: flex; flex-direction: column; gap: 14px; align-items: center;
+  padding: 48px 56px; min-width: 460px;
+  background: rgba(14, 19, 32, 0.85);
+  border: 1px solid #2a3550; border-radius: 14px;
+}
+.title { font-size: 56px; letter-spacing: 10px; font-style: italic;
+  background: linear-gradient(90deg, #4fc3ff, #b44fff);
+  -webkit-background-clip: text; background-clip: text; color: transparent; }
+.subtitle { letter-spacing: 5px; color: #7d8bb0; margin-bottom: 18px; }
+h2 { letter-spacing: 4px; margin-bottom: 10px; }
+.hint { font-size: 12px; color: #66739a; margin-top: 20px; max-width: 380px; text-align: center; }
+
+.btn {
+  font: inherit; cursor: pointer; color: #e8ecf4;
+  background: #1a2337; border: 1px solid #34426a; border-radius: 8px;
+  padding: 12px 40px; font-size: 16px; letter-spacing: 2px;
+  transition: background 0.15s, transform 0.1s;
+  min-width: 220px;
+}
+.btn:hover { background: #263354; transform: translateY(-1px); }
+.btn.primary { background: linear-gradient(90deg, #2565c7, #7b3fd4); border: none; font-weight: 700; }
+.btn.primary:hover { filter: brightness(1.2); }
+.btn.small { min-width: 0; padding: 8px 18px; font-size: 13px; }
+.btn.small.active { background: #2f8fdd; border-color: #4fc3ff; }
+.btn.arrow { min-width: 0; padding: 10px 16px; font-size: 20px; }
+
+.carousel { display: flex; align-items: center; gap: 18px; }
+.card {
+  width: 280px; min-height: 150px; text-align: center;
+  padding: 18px; border: 1px solid #2a3550; border-radius: 10px;
+  display: flex; flex-direction: column; gap: 8px; align-items: center;
+}
+.card .stats { font-size: 13px; color: #8fa0c8; }
+.swatch { width: 130px; height: 42px; border-radius: 8px 8px 20px 4px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.5); }
+
+.row { display: flex; align-items: center; gap: 12px; }
+.row label { min-width: 130px; text-align: right; font-size: 14px; color: #a8b4d4; }
+.row.center { justify-content: center; margin-top: 16px; }
+input[type='range'] { width: 180px; accent-color: #4fc3ff; }
+
+/* ── race + HUD ── */
+.race-root { position: relative; height: 100vh; }
+.game-canvas { display: block; width: 100vw; height: 100vh; }
+
+.hud { position: absolute; -webkit-user-select: none; -moz-user-select: none; user-select: none; pointer-events: none; }
+.top-left { top: 22px; left: 26px; display: flex; flex-direction: column; gap: 3px; }
+.hud-big { font-size: 26px; font-weight: 800; font-style: italic; letter-spacing: 2px;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.8); }
+.hud-big.accent { color: #4fc3ff; }
+.hud-mono { font-family: Consolas, monospace; font-size: 17px;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.8); }
+.hud-mono.dim { color: #93a1c4; font-size: 14px; }
+
+.bottom-right { bottom: 26px; right: 30px; text-align: right; }
+.speedo { display: flex; align-items: baseline; gap: 8px; justify-content: flex-end; }
+.speed-num { font-size: 62px; font-weight: 900; font-style: italic; line-height: 1;
+  text-shadow: 0 3px 10px rgba(0,0,0,0.9); }
+.speed-unit { font-size: 15px; color: #93a1c4; }
+.gear { font-size: 26px; font-weight: 800; color: #4fc3ff; margin-left: 8px; }
+.nitro-track { width: 220px; height: 12px; margin-top: 10px; margin-left: auto;
+  background: rgba(255,255,255,0.12); border-radius: 6px; overflow: hidden; }
+.nitro-fill { height: 100%; width: 100%; background: #2f8fdd; border-radius: 6px;
+  transition: background 0.1s; }
+.nitro-label { font-size: 11px; letter-spacing: 4px; color: #93a1c4; margin-top: 4px; }
+
+.minimap { top: 22px; right: 26px; }
+
+.countdown {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 150px; font-weight: 900; font-style: italic; color: #fff;
+  text-shadow: 0 0 40px #4fc3ff; pointer-events: none;
+  animation: pop 0.9s ease-out;
+}
+@keyframes pop { 0% { transform: scale(1.6); opacity: 0; } 20% { transform: scale(1); opacity: 1; } }
+
+.results {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 20px;
+  background: rgba(6, 9, 16, 0.82);
+}
+.results h1 { font-size: 44px; font-style: italic; letter-spacing: 4px;
+  background: linear-gradient(90deg, #4fc3ff, #b44fff);
+  -webkit-background-clip: text; background-clip: text; color: transparent; }
+.results table { border-collapse: collapse; font-size: 18px; }
+.results td { padding: 6px 22px; }
+.results tr.total td { border-top: 1px solid #34426a; font-weight: 700; padding-top: 12px; }
+

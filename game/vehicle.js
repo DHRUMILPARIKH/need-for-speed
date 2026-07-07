@@ -9,6 +9,15 @@ const UP = new THREE.Vector3(0, 1, 0);
  */
 export const CAR_MODELS = [
   {
+    // Homage to the legendary silver-and-blue race coupe. If you want the real
+    // name in a private build, change `name` here — but keep original names in
+    // anything you publish or share: "BMW" and "M3 GTR" are trademarks.
+    id: 'werks', name: 'Werks GTR', blurb: 'The legend. Race-bred coupe',
+    stats: 'Speed ★★★★ · Grip ★★★★ · Nitro ★★★★',
+    color: 0xd3d7dd, stripe: 0x1b52d8, wing: true,
+    topSpeedKmh: 228, accel: 16, steerRate: 2.5, nitroAccel: 14,
+  },
+  {
     id: 'falcon', name: 'Falcon GT', blurb: 'Balanced all-rounder',
     stats: 'Speed ★★★☆ · Grip ★★★☆ · Nitro ★★★☆',
     color: 0x2f6fe0, topSpeedKmh: 215, accel: 15, steerRate: 2.4, nitroAccel: 13,
@@ -83,6 +92,40 @@ export class Vehicle {
     const nose = new THREE.Mesh(new THREE.BoxGeometry(1.7, 0.3, 0.9), paint);
     nose.position.set(0, 0.42, 2.2);
     this.chassis.add(body, cabin, nose);
+
+    // Optional livery: twin racing stripes over hood, roof, and tail.
+    if (this.spec.stripe) {
+      const stripeMat = new THREE.MeshStandardMaterial({
+        color: this.spec.stripe, metalness: 0.3, roughness: 0.4,
+      });
+      for (const side of [-1, 1]) {
+        const hoodStripe = new THREE.Mesh(new THREE.BoxGeometry(0.26, 0.03, 4.24), stripeMat);
+        hoodStripe.position.set(side * 0.3, 0.84, 0);
+        const roofStripe = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.03, 1.92), stripeMat);
+        roofStripe.position.set(side * 0.27, 1.24, -0.25);
+        this.chassis.add(hoodStripe, roofStripe);
+      }
+    }
+
+    // Optional GT wing on twin struts.
+    if (this.spec.wing) {
+      const strutGeo = new THREE.BoxGeometry(0.08, 0.38, 0.1);
+      for (const side of [-1, 1]) {
+        const strut = new THREE.Mesh(strutGeo, dark);
+        strut.position.set(side * 0.62, 1.0, -1.9);
+        this.chassis.add(strut);
+      }
+      const plank = new THREE.Mesh(new THREE.BoxGeometry(1.95, 0.06, 0.5), paint);
+      plank.position.set(0, 1.2, -1.95);
+      plank.rotation.x = -0.12; // slight angle of attack
+      const endplateGeo = new THREE.BoxGeometry(0.05, 0.22, 0.5);
+      for (const side of [-1, 1]) {
+        const plate = new THREE.Mesh(endplateGeo, dark);
+        plate.position.set(side * 0.97, 1.24, -1.95);
+        this.chassis.add(plate);
+      }
+      this.chassis.add(plank);
+    }
 
     // Rear glow strip lights up with nitro.
     this.tailGlow = new THREE.Mesh(

@@ -6,6 +6,14 @@ import { TRACKS } from '../game/track';
 
 const DEFAULT_SETTINGS = { volume: 0.8, shake: true, difficulty: 1 };
 
+/** Paint chip for the car card — solid color, or twin racing stripes if the car has a livery. */
+function swatchStyle(model) {
+  const body = `#${model.color.toString(16).padStart(6, '0')}`;
+  if (!model.stripe) return body;
+  const stripe = `#${model.stripe.toString(16).padStart(6, '0')}`;
+  return `linear-gradient(90deg, ${body} 0 36%, ${stripe} 36% 45%, ${body} 45% 55%, ${stripe} 55% 64%, ${body} 64% 100%)`;
+}
+
 /**
  * Top-level screen state machine: main menu → car select → track select →
  * race. Settings persist to localStorage. The Three.js game only exists while
@@ -61,8 +69,7 @@ export default function Game() {
               <button className="btn arrow" onClick={() =>
                 setCarIndex((carIndex - 1 + CAR_MODELS.length) % CAR_MODELS.length)}>◄</button>
               <div className="card">
-                <div className="swatch" style={{
-                  background: `#${CAR_MODELS[carIndex].color.toString(16).padStart(6, '0')}` }} />
+                <div className="swatch" style={{ background: swatchStyle(CAR_MODELS[carIndex]) }} />
                 <h3>{CAR_MODELS[carIndex].name}</h3>
                 <p>{CAR_MODELS[carIndex].blurb}</p>
                 <p className="stats">{CAR_MODELS[carIndex].stats}</p>
